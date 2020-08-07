@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+
+
+    <insert id="saveUser" parameterType="com.entity.UserEntity" >
+        insert into user (mobile,password,sex,birthday,address,email,state,create_time,update_time) values (user.mobile,user.password,user.sex,user.birthday,user.address,user.email,user.state,user.createTime,user.updateTime)
+    </insert>
+
+    <delete id="deleteUserById" parameterType="integer">
+        delete from user where id =#{userId}
+    </delete>
+
+
+    <update id="updateUserById" parameterType="integer">
+        update user set
+        <if test="user.mobile != null and user.mobile != ''">
+            mobile = #{user.mobile}
+        </if>
+        <if test="user.password != null and user.password != ''">
+            password = #{user.password}
+        </if>
+        <if test="user.sex != null and user.sex != ''">
+            sex = #{user.sex}
+        </if>
+        <if test="user.birthday != null">
+            birthday = #{user.birthday}
+        </if>
+        <if test="user.address != null and user.address != ''">
+            address = #{user.address}
+        </if>
+        <if test="user.email != null and user.email != ''">
+            email = #{user.email}
+        </if>
+        <if test="user.state != null and user.state != ''">
+            state = #{user.state}
+        </if>
+    </update>
+
+    <select id="queryUserList" resultType="com.entity.UserEntity">
+        select mobile,password,sex,birthday,address,email,state,createTime,updateTime from user
+    </select>
+
+</mapper>
